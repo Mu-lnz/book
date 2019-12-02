@@ -1,5 +1,5 @@
 1. 在安装 Tomcat 之前需要安装 JDK 
-  JDK 地址 -> [http://java.sun.com]
+  JDK 地址 -> http://java.sun.com
   环境变量
   添加：java_home,变量值：JDK 路径
   变量名: Path, 变量值：JDK 中 bin 目录的路径
