@@ -7,7 +7,7 @@ using namespace std;
 class Bracket
 {
     public:
-   //1021. É¾³ı×îÍâ²ãµÄÀ¨ºÅ
+   //1021.åˆ é™¤æœ€å¤–å±‚æ‹¬å·
     string removeOuterParentheses(string S){
         int L=1,R=0;
         string st;
