@@ -7,6 +7,8 @@ using namespace std;
 class Bracket
 {
     public:
+
+    //À¨ºÅÆ¥Åä
     bool isValid(string s){
         stack<char>sta;
         if(s.empty())
@@ -26,6 +28,28 @@ class Bracket
             }
         }
         return sta.empty();
+    }
+
+    //1021. É¾³ı×îÍâ²ãµÄÀ¨ºÅ
+    string removeOuterParentheses(string S){
+        int L=1,R=0;
+        string st;
+        for(int i=1;i<S.size();i++){
+            if(S.at(i)=='(')
+                L++;
+            else{
+                R++;
+            }
+
+            if(L!=R)
+                st.push_back(S.at(i));
+            else{
+                i++;
+                L=1;
+                R=0;
+            }
+        }
+        return st;
     }
 };
 
