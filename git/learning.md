@@ -18,5 +18,9 @@
 
 2. 使用 `git push` 就可以推送了.
 
+* 注意：在第一推送时要加上参数`-u`，这样本地的`master `和远程的`master`分支会合并.
+
+
+* 除了上述使用`git push`的方法外，也可以使用`git push -u origin master`，其中`origin`为远程仓库名字.
 
 
