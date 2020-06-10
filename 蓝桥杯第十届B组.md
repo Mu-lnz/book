@@ -5,15 +5,19 @@
 
 > 方法一：观察法
 >
-> * 可直接从表中观察出答案. 
+> * 用眼睛看确实是比较好做的.
 
->　方法二：编程
+>方法二：广度优先搜索/广度优先搜索/动态规划
 >
->* 根据**广度优先**搜索或**宽度**优先搜索可解决
+>* 
 
-```cpp
->待续
+
+
+```c++
+待续...
 ```
+
+
 
 
 
@@ -155,6 +159,94 @@ int main() {
 
 
 ### 试题I
+
+**【题目】** 后缀表达式
+
+给定 N 个加号、M 个减号以及 N + M + 1 个整数 A 1 ,A 2 ,··· ,A N+M+1 ，小明想知道在所有由这 N 个加号、M 个减号以及 N + M +1 个整数凑出的合法的后缀表达式中，结果最大的是哪一个？请你输出这个最大的结果。
+
+例如使用1 2 3 + -，则 “2 3 + 1 -” 这个后缀表达式结果是 4，是最大的。
+
+【输入格式】
+
+```
+	`第一行包含两个整数 N 和 M。`
+	`第二行包含 N + M + 1 个整数 A 1 ,A 2 ,··· ,A N+M+1 。`
+```
+
+【输出格式】
+
+```
+	`输出一个整数，代表答案。`
+```
+
+【样例输入】
+
+```
+	`1 1`
+	`1 2 3`
+```
+
+【样例输出】
+
+```
+	`4`
+```
+
+【评测用例规模与约定】
+	对于所有评测用例，0 ≤ N, M ≤ 100000，−10 <sup>9</sup> ≤ A <sub>i</sub> ≤ 10<sup>9</sup> 。
+
+
+
+> 首先我们要知道什么是后缀表达式：
+>
+> ​	如：中缀表达式为 `1-3+4`，用后缀表达式表示为` 1 3 - 4 +`，用前缀表达式为：`+ - 1 3 4`
+>
+> ​	【在计算机中，三种表达式都可以用栈的形式来表示】
+>
+> 思路：
+>
+> 1. 我们可以先从最小的负数开始变成正数(最小的负数变成正数后就是负数中最大的数)，在每次变成正数时，会使用一个负号.
+>
+>    a. 如果负号没有剩余，那么结果就是所有数之和.
+>
+>    b. 如过负号有剩余，我们可以确定数组中所有负数都变成了正数，那么就需要把最小的数再变成负数，然后才是求和得到结果.
+>
+> 【主要考点为贪心算法】
+
+```c++
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+int main() {
+	//N为加号，M为减号
+	int N = 0, M = 0;
+	cin >> N >> M;
+	vector<int>vi(N + M + 1);
+	for (int i = 0; i < vi.size(); i++) {
+		cin >> vi[i];
+	}
+	//先排一次序，使用负号，把最小的变成正数
+	sort(vi.begin(), vi.end());
+	for (int i = 0; i < vi.size() && M >0;  i++) {
+		if (vi[i] < 0) {
+			vi[i] = -vi[i], M--;
+		}
+	}
+	//再排一次序，如果负号还存在，就把最小的变成负号
+	sort(vi.begin(), vi.end());
+	if (M > 0) {
+		for (int i = 0; i < vi.size()&&M>0; i++,M--) {
+			vi[i] = -vi[i];
+		}
+	}
+	int sum = 0;
+	for (int i = 0; i < vi.size(); i++)sum += vi[i];
+	cout << sum;
+	return 0;
+}
+```
 
 
 
@@ -319,7 +411,69 @@ max<sub>i=1</sub><sup>n</sup>|a<sub>i</sub>|，请你通过不限次数的传递
 
 
 ```c++
+#include<iostream>
+#include<algorithm>
+using namespace std;
 
+typedef long long LL;
+
+const int N = 3000010;
+int Sum[N];
+int a[N];
+bool bo[N] = { 0 };//初始化为全0
+
+int main() {
+	int n = 0;
+	cin >> n;
+	while (n) {
+		int len;
+		cin >> len;
+		//得到前缀和
+		for (int i = 1; i <= len; i++) {
+			cin >> Sum[i];
+			Sum[i] += Sum[i - 1];
+		}
+		LL idx0 = Sum[0], idxn = Sum[len];
+		if (Sum[0] > Sum[len])swap(Sum[0], Sum[len]);
+        
+		sort(Sum, Sum + len+1);
+		//查找S0和Sn
+		for (int i = 0; i <= len; i++) {
+			if (Sum[i] == idx0) {
+				idx0 = i;
+				break;
+			}
+		}
+		for (int i = 0; i <= len; i++) {
+			if (Sum[i] == idxn) {
+				idxn = i;
+			}
+		}
+
+		int l = 0, r = len;
+		for (int i = idx0; i >= 0; i -= 2) {
+			a[r--] = Sum[i];
+			bo[i] = true;
+		}
+		for (int i = idxn; i <= len; i += 2) {
+			a[l++] = Sum[i];
+			bo[i] = true;
+		}
+		for (int i = 0; i <= len; i++) {
+			if (bo[i] == false) {
+				a[l++] = Sum[i];
+			}
+		}
+		int res = 0;
+		for (int i = 1; i <= len; i++) {
+			res = max(res, abs(a[i] - a[i - 1]));
+		}
+		cout << res;
+		n--;
+	}
+	getchar();
+	return 0;
+}
 ```
 
 
