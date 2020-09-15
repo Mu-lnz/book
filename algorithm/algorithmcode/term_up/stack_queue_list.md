@@ -1,7 +1,7 @@
 ## 1. 栈
 
 单调栈
- 
+
 单调栈中按照某一种性质单调递增或递减
 
 ```
@@ -17,7 +17,7 @@ st.push(element)
 
 
 源码：
-```
+```c++
 class Solution {
 public:
     bool find132pattern(vector<int>& nums) {

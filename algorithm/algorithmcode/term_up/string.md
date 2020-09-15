@@ -1,16 +1,16 @@
 ## 知识点1：考察字符串的比较
 
     两个字符串中比较字符串的大小，是按照字典序列进行比较
-
+    
     <font color=red>应用</font>：字符串交换比较 a1 + a2 与 a2 + a1 进行比较
-
+    
     如："20" 与 "21" 的字符串比较，明显在通过两次相加后是不同的，分别是“2021”和“2120” 
 
 题目：[最大数](https://leetcode-cn.com/problems/largest-number/)
 
 源代码：
 
-```
+```c++
 class Solution {
 public:
      static bool check(const int  a, const int b) {

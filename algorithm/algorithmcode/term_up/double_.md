@@ -8,7 +8,7 @@
 
 代码如下：
 
-```
+```c++
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
