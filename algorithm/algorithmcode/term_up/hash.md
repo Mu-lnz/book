@@ -9,5 +9,5 @@
 
         开放寻址法：如果当前位置有元素，那么就会寻找下一个位置
 
-<font color=purple>题目1</font>
+<font color=purple>题目1：</font>[缺失的第一个正数](https://leetcode-cn.com/problems/first-missing-positive/)
 

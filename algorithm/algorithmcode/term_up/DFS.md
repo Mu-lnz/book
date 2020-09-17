@@ -56,3 +56,37 @@ public:
 
 #### 题型2：求某个二维数组中连续某`性质`相同的面积大小
 
+### 一维数组的搜索
+
+代码模式：
+```
+search(arr, x, S){
+    1. 查询条件和出口条件
+
+    2. 递归
+        search(arr, arr[i] + x, S) ...
+}
+```
+
+
+<font color=red>题目1：</font>[目标和](https://leetcode-cn.com/problems/target-sum/)
+
+```
+class Solution {
+public:
+    int cot = 0;
+    void search(vector<int>& nums, int i, int sum, int S) {
+        if (i == nums.size()) {
+            if (sum == S)
+                cot++;
+        } else {
+            search(nums, i + 1, sum + nums[i], S);
+            search(nums, i + 1, sum - nums[i], S);
+        }
+    }
+    int findTargetSumWays(vector<int>& nums, int S) {
+        search(nums, 0, 0, S);
+        return cot;
+    }
+};
+```
