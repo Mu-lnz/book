@@ -2,22 +2,13 @@
     "tasks": [
         {
             "type": "shell",
-<<<<<<< HEAD
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/g++",
-=======
-            "label": "C/C++: g++.exe build active file",
-            "command": "D:\\Program Files(x86)\\mingw64\\bin\\g++.exe",
->>>>>>> 1ddd7f80266cf68315afa76df7a712a93a1aa0d0
             "args": [
                 "-g",
                 "${file}",
                 "-o",
-<<<<<<< HEAD
                 "${fileDirname}/${fileBasenameNoExtension}"
-=======
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
->>>>>>> 1ddd7f80266cf68315afa76df7a712a93a1aa0d0
             ],
             "options": {
                 "cwd": "${workspaceFolder}"
